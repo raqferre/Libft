@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raqferre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 11:50:47 by raqferre          #+#    #+#             */
-/*   Updated: 2022/06/29 15:51:59 by raqferre         ###   ########.fr       */
+/*   Created: 2022/06/17 15:14:32 by raqferre          #+#    #+#             */
+/*   Updated: 2022/06/24 12:21:20 by raqferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
-{
-	unsigned char	*dest1;
-	unsigned char	*dest2;
+void	*ft_memchr(const void *b, int c, size_t len)
 
-	dest1 = (unsigned char *) str1;
-	dest2 = (unsigned char *) str2;
-	if (n == 0)
-		return (0);
-	while (n > 0)
+{
+	char	*s;
+	size_t	i;
+
+	i = 0;
+	s = (char *) b;
+	while (i < len)
 	{
-		if (*dest1 != *dest2)
-			return (*dest1 - *dest2);
-	n--;
-	dest1++;
-	dest2++;
-	}	
-	return (0);
+		if (s [i] == (char) c)
+			return ((void *)&s[i]);
+							i++;
+	}
+	return (NULL);
 }	

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raqferre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 11:50:47 by raqferre          #+#    #+#             */
-/*   Updated: 2022/06/29 15:51:59 by raqferre         ###   ########.fr       */
+/*   Created: 2022/06/17 14:36:39 by raqferre          #+#    #+#             */
+/*   Updated: 2022/07/07 15:30:45 by raqferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
+char	*ft_strtrim(char const *s, char const *set)
 {
-	unsigned char	*dest1;
-	unsigned char	*dest2;
+	char	*out;
+	size_t	out_len;
+	size_t	i;
 
-	dest1 = (unsigned char *) str1;
-	dest2 = (unsigned char *) str2;
-	if (n == 0)
-		return (0);
-	while (n > 0)
-	{
-		if (*dest1 != *dest2)
-			return (*dest1 - *dest2);
-	n--;
-	dest1++;
-	dest2++;
-	}	
-	return (0);
-}	
+	i = 0;
+	if (s == NULL || set == NULL)
+		return ((char *)s);
+	while ((s[i] != '\0' && (ft_strchr(set, s[i]) != NULL)))
+			i++;
+	out_len = ft_strlen(s) - 1;
+	while ((out_len >= i) && (ft_strchr(set, s[out_len]) != NULL))
+			out_len--;
+	out = ft_substr((char *) &s[i], 0, (out_len - i) + 1);
+	return (out);
+}

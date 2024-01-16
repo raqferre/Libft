@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raqferre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 11:50:47 by raqferre          #+#    #+#             */
-/*   Updated: 2022/06/29 15:51:59 by raqferre         ###   ########.fr       */
+/*   Created: 2022/06/17 15:05:06 by raqferre          #+#    #+#             */
+/*   Updated: 2022/06/30 17:13:46 by raqferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
-{
-	unsigned char	*dest1;
-	unsigned char	*dest2;
+int	ft_atoi(const char *str)
 
-	dest1 = (unsigned char *) str1;
-	dest2 = (unsigned char *) str2;
-	if (n == 0)
+{
+	int	sign;
+	int	out;
+	int	i;
+
+	sign = 1;
+	i = 0;
+	out = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+			i++;
+	if (str[i] == '+' && str[i + 1] == '-')
 		return (0);
-	while (n > 0)
+	if (str[i] == '+')
+		i++;
+	if (str[i] == '-')
 	{
-		if (*dest1 != *dest2)
-			return (*dest1 - *dest2);
-	n--;
-	dest1++;
-	dest2++;
+		sign = sign * -1;
+		i++;
 	}	
-	return (0);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		out = out * 10 + str[i] - 48;
+		i++;
+	}
+	return (sign * out);
 }	
